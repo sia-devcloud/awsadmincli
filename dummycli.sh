@@ -2,7 +2,7 @@
 
 if [ $# -ne 2 ]; then
 echo "you have passed wrong input"
-echo "format <region> <action>"
+echo "expected format is $0 <region> <action>"
 exit 1
 fi
 
