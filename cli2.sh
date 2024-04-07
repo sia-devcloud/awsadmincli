@@ -5,7 +5,7 @@ if [ $# -ne 2 ]; then
    echo "desired format is= $0 <region> <action>"
 fi
 
-region=$1
+ REGION=$1
 action=$2
 
 if [ $action != "create" ]; then
