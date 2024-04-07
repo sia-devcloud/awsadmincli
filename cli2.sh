@@ -13,7 +13,7 @@ if [ $action != create ]; then
    exit 1
 fi
 
-if [ $action= create]; then 
+if [ $action= create ]; then 
 
   ### create vpc
   vpc_id=$(aws ec2 create-vpc --cidr-block "198.168.0.0/16" \
