@@ -1,14 +1,38 @@
 #!/bin/bash
 
-if [ $# -ne 2 ]; then
-echo "you have passed wrong input"
-echo "expected format is $0 <region> <action>"
-exit 1
-fi
 
-#print all the arguments
-echo "arguments passed: $@"
-region=$1
-action=$2
+vpcs=$(aws ec2 describe-vpcs --filters \
+"Name=tag:Createdby, Values=cli" \
+--query Vpcs[].VpcId --output text)
+for vpc in $vpcs; do
+aws ec2 delete-vpc --vpc-id "$vpc"
+echo "deleted vpc $vpc"
+done
 
-echo "you want $region and I want $action"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#subnets=$(aws ec2 describe-subnets \
+ #--filters "Name=tag:Createdby, Values=cli" \
+ #--query "Subnets[].SubnetId" --output text)
+ #for subnet in $subnets; do
+ #aws ec2 delete-subnet --subnet-id "$subnet"
+ #echo "deleted subnet $subnet"
+ #done

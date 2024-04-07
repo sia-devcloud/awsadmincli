@@ -8,12 +8,14 @@ fi
 REGION="$1"
 action="$2"
 
-if [ "$action" != "create" ]; then
-   echo "presently it supports only create action"
+
+
+if [ "$action" != "create" ] && [ "$action" != "delete" ];  then
+   echo "presently it supports only create and delete actions"
    exit 1
 fi
 
-if [ "$action" = "create" ]; then 
+if [ "$action" == "create" ];then 
 
   ### create vpc
   vpc_id=$(aws ec2 create-vpc --cidr-block "198.168.0.0/16" \
@@ -56,4 +58,23 @@ if [ "$action" = "create" ]; then
   --availability-zone "${REGION}b" --output text --query "Subnet.SubnetId")
 
   echo "db2_SubnetId=$subnet_db2"
+elif [ "$action" == "delete" ]; then
+### find all the subnet ids
+
+subnets=$(aws ec2 describe-subnets \
+ --filters "Name=tag:Createdby, Values=cli" \
+ --query "Subnets[].SubnetId" --output text --region "${REGION}")
+ for subnet in $subnets; do
+ aws ec2 delete-subnet --subnet-id "$subnet"
+ echo "deleted subnet $subnet"
+ done
+ ## find vpc ids
+ vpcs=$(aws ec2 describe-vpcs --filters \
+"Name=tag:Createdby, Values=cli" \
+--query Vpcs[].VpcId --output text --region "${REGION}")
+### delete vpcs
+for vpc in $vpcs; do
+aws ec2 delete-vpc --vpc-id "$vpc"
+echo "deleted vpc $vpc"
+done
 fi
