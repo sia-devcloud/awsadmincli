@@ -22,7 +22,7 @@ subnet_app1=$(aws ec2 create-subnet --tag-specifications\
 subnet_app2=$(aws ec2 create-subnet --tag-specifications \
 "ResourceType=subnet,Tags=[{Key=Name,Value=app2},{Key=Createdby,Value=cli}]" \
 --vpc-id "$vpc_id" --cidr-block "198.168.1.0/24" \
---availability-zone "$REGIONb" --output json --query "Subnet.SubnetId")
+--availability-zone "$REGIONb" --output text --query "Subnet.SubnetId")
 
 echo "app2_Subnet_Id=$subnet_app2"
 
