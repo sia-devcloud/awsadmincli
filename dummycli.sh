@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [$# -ne 2]; then
+if [ $# -ne 2 ]; then
 echo "you have passed wrong input"
-echo "format <reion> <action>"
+echo "format <region> <action>"
 fi
 
 #print all the arguments
