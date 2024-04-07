@@ -1,9 +1,13 @@
 #!/bin/bash
 
+if [$# -ne 2]; then
+echo "you have passed wrong input"
+echo "format <reion> <action>"
+fi
+
 #print all the arguments
 echo "arguments passed: $@"
 region=$1
 action=$2
-name=$3
 
-echo "you want $3 and I want $2 and she wants $1"
+echo "you want $region and I want $action"
