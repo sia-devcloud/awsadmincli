@@ -1,7 +1,7 @@
 #!/bin/bash
 
-tagName="$1"
-tagValue="$2"
+tagName="Env"
+tagValue="Dev"
 
 
 # get all active regions for my account
