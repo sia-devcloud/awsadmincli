@@ -3,9 +3,8 @@
 
 ### find all the valid region in aws 
 
-regions=$(aws ec2 describe-regions 
+regions=$(aws ec2 describe-regions \ 
  --query Regions[].RegionName --output text)
-
 
  ### find all instance ids of ec2 instances
 
