@@ -11,6 +11,6 @@ instance_ids=$(aws ec2 describe-instances \
     --query Reservations[].Instances[].InstanceId --output text)
 
 for instance in $instance_ids; do
-    aws ec2 stop-instances --instance-ids "$instance /dev/null"
+    aws ec2 stop-instances --instance-ids "$instance" > /dev/null
     echo "Deleted instance with ID: $instance"
 done
