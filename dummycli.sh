@@ -5,15 +5,18 @@
 
 regions=$(aws ec2 describe-regions \
  --query "Regions[].RegionName" --output text)
+ for region in $regions; do
+ echo "checking region "$region""
 
  ### find all instance ids of ec2 instances
 
- instance_ids=$(aws ec2 describe-instances --region "us-east-1" \
-  --filters "Name=tag:Env,Values=Dev" \
-   "Name=instance-state-name,Values=running,stopped)" \
-  --query "Reservations[].Instances[].InstanceId" --output text)
+      instance_ids=$(aws ec2 describe-instances --region "$region" \
+      --filters "Name=tag:Env,Values=Dev" \
+         "Name=instance-state-name,Values=running,stopped)" \
+      --query "Reservations[].Instances[].InstanceId" --output text)
 
-for instance in $instance_ids; do
-aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
-echo "deleted instance with id= "$instance""
+      for instance in $instance_ids; do
+      aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
+      echo "deleted instance with id= "$instance""
+      done
 done

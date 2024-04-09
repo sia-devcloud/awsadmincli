@@ -1,32 +1,19 @@
 #!/bin/bash
 
-tagName="Env"
-tagValue="Dev"
 
-
-# get all active regions for my account
+### find all the valid region in aws 
 
 regions=$(aws ec2 describe-regions \
-        --query "Regions[].RegionName" \
-        --output text)
+ --query "Regions[].RegionName" --output text)
 
-# loop through all regions
-for region in $regions; do
-    echo "Checking region ${region}"
-    # get all ec2 instances with tag Env = Dev
-    instance_ids=$(aws ec2 describe-instances \
-        --filters "Name=tag:${tagName},Values=${tagValue}" \
-        --query "Reservations[0].Instances[].InstanceId" \
-        --output text\
-        --region $region)
+ ### find all instance ids of ec2 instances
 
-    if [[  $instance_ids != "None" ]]; then
-        echo "Following instances will be stopped: ${instance_ids}"
-        # stop all the instances
-        aws ec2 stop-instances \
-            --instance-ids $instance_ids \
-            --region $region > /dev/null
-    else
-        echo "No instances found with tag ${tagName} = ${tagValue}"
-    fi
+ instance_ids=$(aws ec2 describe-instances --region "us-east-1" \
+  --filters "Name=tag:Env,Values=Dev" \
+   "Name=instance-state-name,Values=running,stopped)" \
+  --query "Reservations[].Instances[].InstanceId" --output text)
+
+for instance in $instance_ids; do
+aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
+echo "deleted instance with id= "$instance""
 done
