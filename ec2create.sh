@@ -15,6 +15,7 @@ aws ec2 run-instances \
     --instance-type "$instance_type" \
     --count $count \
     --region "$region" \
-    --tag-specifications \
-     "ResourceType=instance, \
-     Tags=[{Key=Env,Value=Dev}] --query Reservations[].Instances[].InstanceId"
+    --query "Reservations[].Instances[].InstanceId" --output text
+    #--tag-specifications \
+     #"ResourceType=instance,\
+     #Tags=[{Key=Env,Value=Dev}]" \ 
