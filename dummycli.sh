@@ -21,6 +21,7 @@ regions=$(aws ec2 describe-regions \
        for instance in $instance_ids; do
       aws ec2 stop-instances --instance-ids "$instance" >/dev/null
       echo "deleted instance with id= "$instance""
+      exit0
       done
        echo "Following instances will be stopped: $instance_ids"
       else
