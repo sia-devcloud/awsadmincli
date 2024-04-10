@@ -6,8 +6,6 @@ else
    tagName= "$1"
    tagValue= "$2"
 fi
-tagName="Env"
-tagValue="Dev"
 ### find all the valid region in aws 
 
 regions=$(aws ec2 describe-regions \
