@@ -17,11 +17,13 @@ regions=$(aws ec2 describe-regions \
       --query "Reservations[].Instances[].InstanceId" --output text \
        --region $region)
 
-       if [[ $instace_ids != None ]]; then
+       if [[ $instance_ids != None ]]; then
        echo "Following instances will be stopped: $instance_ids"
 
       for instance in $instance_ids; do
       aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
       echo "deleted instance with id= "$instance""
       done
+      else
+      echo "no instance"
 done
