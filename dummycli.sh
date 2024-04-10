@@ -7,7 +7,7 @@ tagValue="Dev"
 regions=$(aws ec2 describe-regions \
  --query "Regions[].RegionName" --output text)
  for region in $regions; do
- echo "checking region "$region""
+ echo "checking region $region"
 
  ### find all instance ids of ec2 instances
 
