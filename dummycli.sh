@@ -3,8 +3,8 @@ if [ "$#" -ne 2 ]; then
    echo "usage $0 <tagName> <tagValue>"
    exit 1
 else
-   tagName= "$1"
-   tagValue= "$2"
+   tagName= $1
+   tagValue= $2
 fi
 ### find all the valid region in aws 
 
