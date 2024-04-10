@@ -12,7 +12,7 @@ regions=$(aws ec2 describe-regions \
  ### find all instance ids of ec2 instances
  instance_ids=$(aws ec2 describe-instances --region $region \
       --filters "Name=tag:${tagName},Values=${tagValue}" \
-         "Name=instance-state-name,Values=running,stopped)" \
+         "Name=instance-state-name,Values=running,stopped" \
       --query "Reservations[].Instances[].InstanceId" \
        --output text)
       if [[ $instance_ids != "None" ]]; then
