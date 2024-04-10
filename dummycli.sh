@@ -1,5 +1,10 @@
 #!/bin/bash
-
+if [ "$#" -ne 2 ]; then
+   echo "usage $0 <tagName> <tagValue>
+else
+   tagName= "$1"
+   tagValue= "$2"
+fi
 tagName="Env"
 tagValue="Dev"
 ### find all the valid region in aws 
@@ -22,6 +27,6 @@ regions=$(aws ec2 describe-regions \
         echo "stopped instance with id= $instance"
         done
       else
-         echo "no instance"
+         echo "no instances found with $tagName and $tagValue"
       fi
 done
