@@ -20,8 +20,8 @@ regions=$(aws ec2 describe-regions \
 
         if [[  $instance_ids != "None" ]]; then
         echo "Following instances will be stopped: ${instance_ids}"
-      aws ec2 stop-instances --instance-ids "$instance_ids" >/dev/null
-      echo "stopped instance with id= "$instance_ids""
+      aws ec2 stop-instances --instance-ids "$instance_ids" > /dev/null
+      echo "stopped instance with id= $instance_ids"
       else
          echo "no instance"
       fi
