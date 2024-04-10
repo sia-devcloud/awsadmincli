@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$#" -ne 2 ]; then
-   echo "usage $0 <tagName> <tagValue>
+   echo "usage $0 <tagName> <tagValue>"
 else
    tagName= "$1"
    tagValue= "$2"
