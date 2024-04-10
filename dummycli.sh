@@ -17,7 +17,7 @@ regions=$(aws ec2 describe-regions \
       --query "Reservations[].Instances[].InstanceId" --output text \
        --region $region)
 
-       if[[ $instace_ids != None ]]; then
+       if [[ $instace_ids != None ]]; then
        echo "Following instances will be stopped: $instance_ids"
 
       for instance in $instance_ids; do
