@@ -17,15 +17,8 @@ regions=$(aws ec2 describe-regions \
       --query "Reservations[].Instances[].InstanceId" --output text \
        --region $region)
 
-       if [[  $instance_ids != "None" ]]; then
-        echo "Following instances will be stopped: ${instance_ids}"
-        # stop all the instances
-        aws ec2 stop-instances \
-            --instance-ids $instance_ids \
-            --region $region > /dev/null
-    else
-        echo "No instances found with tag ${tagName} = ${tagValue}"
-    fi
+       if[[ $instace_ids != None ]]; then
+       echo "Following instances will be stopped: $instance_ids"
 
       for instance in $instance_ids; do
       aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
