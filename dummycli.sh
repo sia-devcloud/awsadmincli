@@ -21,6 +21,7 @@ regions=$(aws ec2 describe-regions \
        echo "Following instances will be stopped: $instance_ids"
       else
       echo "no instance"
+      fi
 done
 
 
