@@ -16,6 +16,14 @@ regions=$(aws ec2 describe-regions \
          "Name=instance-state-name,Values=running,stopped)" \
       --query "Reservations[].Instances[].InstanceId" --output text \
        --region $region)
+#f
+if [[ -z "$instance_ids" ]]; then
+  echo "None"
+else
+  echo "Found instances with ids:"
+  echo "$instance_ids"
+fi
+#g
 
        if [[ $instance_ids != None ]]; then
        for instance in $instance_ids; do
