@@ -27,6 +27,6 @@ regions=$(aws ec2 describe-regions \
         echo "stopped instance with id= $instance"
         done
       else
-         echo "no instances found with $tagName and $tagValue"
+         echo "no instances found with $tagName=$tagValue"
       fi
 done
