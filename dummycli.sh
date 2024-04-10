@@ -7,15 +7,16 @@ tagValue="Dev"
 regions=$(aws ec2 describe-regions \
  --query "Regions[].RegionName" --output text)
  for region in $regions; do
- echo "checking region $region"
+ echo "checking region "$region""
 
  ### find all instance ids of ec2 instances
 
       instance_ids=$(aws ec2 describe-instances \
       --filters "Name=tag:${tagName},Values=${tagValue}" \
          "Name=instance-state-name,Values=running,stopped)" \
-      --query "Reservations[].Instances[].InstanceId" --output text \
-       --region $region)
+      --query "Reservations[].Instances[].InstanceId" \
+       --output text \
+             --region $region)
 
         if [[  $instance_ids != "None" ]]; then
         echo "Following instances will be stopped: ${instance_ids}"
