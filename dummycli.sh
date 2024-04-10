@@ -15,7 +15,7 @@ regions=$(aws ec2 describe-regions \
          "Name=instance-state-name,Values=running,stopped" \
       --query "Reservations[].Instances[].InstanceId" \
        --output text)
-      if [[ $instance_ids != "None" ]]; then
+      if [[ ! -z "$instance_ids" ]]; then
         echo "Following instances will be stopped:${instance_ids}"
         for instance in $instance_ids; do
         aws ec2 stop-instances --instance-ids "$instance_ids" > /dev/null
