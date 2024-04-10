@@ -14,7 +14,8 @@ regions=$(aws ec2 describe-regions \
       instance_ids=$(aws ec2 describe-instances --region "$region" \
       --filters "Name=tag:${tagName},Values=${tagValue}" \
          "Name=instance-state-name,Values=running,stopped)" \
-      --query "Reservations[].Instances[].InstanceId" --output text)
+      --query "Reservations[].Instances[].InstanceId" --output text \
+       --region $region)
 
       for instance in $instance_ids; do
       aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
