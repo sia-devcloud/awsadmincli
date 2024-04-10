@@ -19,11 +19,13 @@ regions=$(aws ec2 describe-regions \
 
        if [[ $instance_ids != None ]]; then
        echo "Following instances will be stopped: $instance_ids"
-
-      for instance in $instance_ids; do
-      aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
-      echo "deleted instance with id= "$instance""
-      done
       else
       echo "no instance"
 done
+
+
+
+ #for instance in $instance_ids; do
+  #    aws ec2 terminate-instances --instance-ids "$instance" >/dev/null
+   #   echo "deleted instance with id= "$instance""
+    #  done
